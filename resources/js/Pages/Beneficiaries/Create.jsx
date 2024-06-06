@@ -2,6 +2,7 @@ import BeneficiariesTable from '@/Components/Beneficiaries/BeneficiariesTable';
 import BeneficiaryCreateForm from '@/Components/Beneficiaries/BeneficiaryCreateForm';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import Pagination from '../../Components/Pagination';
 
 export default function Create({ auth, beneficiaries }) {
     return (
@@ -25,7 +26,7 @@ export default function Create({ auth, beneficiaries }) {
                 </div>
             </div>
 
-            <div>
+            <div className='pb-48'>
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className='mb-4'>
                         <h1 className='text-2xl font-bold text-gray-600'>جميع بيانات المستفيدين</h1>
@@ -35,7 +36,11 @@ export default function Create({ auth, beneficiaries }) {
                     </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <BeneficiariesTable beneficiaries={beneficiaries} />
+                            <BeneficiariesTable beneficiaries={beneficiaries.data} />
+                        </div>
+
+                        <div className='py-4'>
+                            <Pagination links={beneficiaries.links} />
                         </div>
                     </div>
                 </div>

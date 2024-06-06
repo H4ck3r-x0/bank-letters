@@ -25,8 +25,7 @@ class BeneficiaryController extends Controller
     public function create()
     {
         // get all beneficiaries
-        $beneficiaries = Beneficiary::all();
-
+        $beneficiaries = Beneficiary::paginate(10);
         return Inertia::render('Beneficiaries/Create', [
             'beneficiaries' => $beneficiaries,
         ]);
