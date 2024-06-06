@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Beneficiaries;
 use App\Http\Controllers\Controller;
 use App\Imports\BeneficiariesImport;
 use App\Models\Beneficiary;
+use App\Models\LetterTemplate;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,10 +25,12 @@ class BeneficiaryController extends Controller
      */
     public function create()
     {
-        // get all beneficiaries
         $beneficiaries = Beneficiary::paginate(10);
+        $templates = LetterTemplate::all();
+
         return Inertia::render('Beneficiaries/Create', [
             'beneficiaries' => $beneficiaries,
+            'templates' => $templates,
         ]);
     }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('letter_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('directed_to')->nullable();
             $table->text('content')->nullable();
             $table->timestamps();
         });

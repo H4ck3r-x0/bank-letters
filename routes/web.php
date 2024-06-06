@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Beneficiaries\BeneficiaryController;
 use App\Http\Controllers\Letters\LetterController;
+use App\Http\Controllers\Letters\LetterTemplateController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,8 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/beneficiary/store', [BeneficiaryController::class, 'store'])->name('beneficiary.store');
 
     // Letters Routes
-    // Route::get('/letter/create', [LetterController::class, 'create'])->name('letter.create');
-    // Route::post('/letter/store', [LetterController::class, 'store'])->name('letter.store');
+    Route::get('/letter/create', [LetterTemplateController::class, 'create'])->name('letter.create');
+    Route::post('/letter/store', [LetterTemplateController::class, 'store'])->name('letter.store');
 });
 
 require __DIR__ . '/auth.php';

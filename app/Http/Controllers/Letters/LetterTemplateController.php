@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Letters;
 
+use App\Http\Controllers\Controller;
 use App\Models\LetterTemplate;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class LetterTemplateController extends Controller
 {
@@ -20,7 +22,7 @@ class LetterTemplateController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Letters/Create');
     }
 
     /**
@@ -28,7 +30,14 @@ class LetterTemplateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'directed_to' => ['required', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+        ]);
+
+        LetterTemplate::create($validated);
+
+        return redirect()->back();
     }
 
     /**

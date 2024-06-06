@@ -4,7 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Pagination from '../../Components/Pagination';
 
-export default function Create({ auth, beneficiaries }) {
+export default function Create({ auth, beneficiaries, templates }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -12,7 +12,7 @@ export default function Create({ auth, beneficiaries }) {
         >
             <Head title="إضافة مستفيدين" />
 
-            <div className="py-12">
+            <div className="py-8">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className='mb-4'>
                         <h1 className='text-2xl font-bold text-gray-600'>ارفاق بيانات المستفيدين</h1>
@@ -34,9 +34,9 @@ export default function Create({ auth, beneficiaries }) {
                             هذا الجدول يوضح جميع بيانات المستفيدين في النظام، يمكنك من هنا اختيار المستفيد وانشاء خطاب بنكي.
                         </p>
                     </div>
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <BeneficiariesTable beneficiaries={beneficiaries.data} />
+                    <div className="overflow-hidden">
+                        <div className="text-gray-900">
+                            <BeneficiariesTable templates={templates} beneficiaries={beneficiaries.data} />
                         </div>
 
                         <div className='py-4'>

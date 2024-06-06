@@ -15,9 +15,8 @@ const XmlUploadDropzone = ({ onFilesAdded }) => {
     });
 
     return (
-        <div {...getRootProps()} className="bg-slate-50 border-dashed border-2 border-gray-300 hover:border-secundary p-5
-         dark:bg-slate-800
-         dark:hover:bg-slate-800/50 hover:bg-white text-center cursor-pointer transition-colors
+        <div {...getRootProps()}
+            className="bg-slate-50 border-dashed border-2 border-gray-300 hover:border-secundary p-8 hover:bg-white text-center cursor-pointer transition-colors
          ">
             <input {...getInputProps()} />
             <p className='text-lg text-primary'>قم بإدراج ملفات الاكسيل للمستفيدين هنا ...</p>
@@ -84,7 +83,7 @@ export default function DropFiles() {
                 </progress>
             )}
             <div className="flex items-center justify-between">
-                <PrimaryButton disabled={processing} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
+                <PrimaryButton disabled={processing || !data.excelFiles.length} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-200">
                     معالجة المستفيدين
                 </PrimaryButton>
                 <Transition

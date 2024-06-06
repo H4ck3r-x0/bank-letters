@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SecondaryButton from '../SecondaryButton'
+import Modal from '../Beneficiaries/Modal'
+function BeneficiariesTable({ beneficiaries, templates }) {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedTemplate, setSelectedTemplate] = useState(null);
+    const [selectedBeneficiary, setSelectedBeneficiary] = useState(null);
 
-function BeneficiariesTable({ beneficiaries }) {
+    const handleOpenModal = (beneficiary) => {
+        setSelectedBeneficiary(beneficiary);
+        setModalOpen(true);
+    };
+
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            {isModalOpen && (
+                <Modal
+                    isOpen={isModalOpen}
+                    onClose={() => setModalOpen(false)}
+                    templates={templates}
+                    beneficiary={selectedBeneficiary}
+                    onTemplateSelect={setSelectedTemplate}
+                />
+            )}
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" className="px-6 py-3">
                             #
@@ -35,37 +54,37 @@ function BeneficiariesTable({ beneficiaries }) {
                 <tbody>
                     {/* loop through all the beneficiaries and display them */}
                     {beneficiaries.map((beneficiary) => (
-                        <tr key={beneficiary.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <tr key={beneficiary.id} className="bg-white border-b hover:bg-gray-50 ">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.id}
                             </th>
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.beneficiary_name}
                             </th>
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.beneficiary_bank}
                             </th>
 
 
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.swift_code}
                             </th>
 
 
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.amount}
                             </th>
 
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.currency}
                             </th>
 
-                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                 {beneficiary.account_no}
                             </th>
 
                             <td className="px-6 py-4 text-right">
-                                <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <SecondaryButton onClick={() => handleOpenModal(beneficiary)}>انشاء خطاب</SecondaryButton>
                             </td>
                         </tr>
                     ))}

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Alkoumi\LaravelArabicNumbers\Numbers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,12 @@ class Beneficiary extends Model
         'amount',
         'currency',
         'account_no',
-        'letter_content',
     ];
+
+    protected $appends = ['amount_in_words'];
+
+    public function getAmountInWordsAttribute()
+    {
+        return Numbers::TafqeetMoney($this->amount);
+    }
 }
