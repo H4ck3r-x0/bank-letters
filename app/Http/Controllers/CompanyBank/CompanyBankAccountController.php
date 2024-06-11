@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Letters;
+namespace App\Http\Controllers\CompanyBank;
 
-use App\Http\Controllers\Controller;
-use App\Models\LetterTemplate;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Models\LetterTemplate;
+use App\Models\CompanyBankAccount;
+use App\Http\Controllers\Controller;
 
-class LetterTemplateController extends Controller
+class CompanyBankAccountController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +23,7 @@ class LetterTemplateController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Letters/Create');
+        return Inertia::render('CompanyBank/Create');
     }
 
     /**
@@ -32,10 +33,17 @@ class LetterTemplateController extends Controller
     {
         $validated = $request->validate([
             'directed_to' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string'],
+            'account_number' => ['required', 'string'],
         ]);
 
-        LetterTemplate::create($validated);
+        $bank_acount = CompanyBankAccount::create([
+            'account_number' => $validated['account_number'],
+        ]);
+
+        LetterTemplate::create([
+            'directed_to' => $validated['directed_to'],
+            'company_bank_account_id' => $bank_acount->id,
+        ]);
 
         return redirect()->back();
     }

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Beneficiaries\BeneficiaryController;
-use App\Http\Controllers\Letters\LetterController;
-use App\Http\Controllers\Letters\LetterTemplateController;
+
+use App\Http\Controllers\CompanyBank\CompanyBankAccountController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,9 +27,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/beneficiary/create', [BeneficiaryController::class, 'create'])->name('beneficiary.create');
     Route::post('/beneficiary/store', [BeneficiaryController::class, 'store'])->name('beneficiary.store');
 
-    // Letters Routes
-    Route::get('/letter/create', [LetterTemplateController::class, 'create'])->name('letter.create');
-    Route::post('/letter/store', [LetterTemplateController::class, 'store'])->name('letter.store');
+    // Company bank accounts Routes
+    Route::get('/company/bank/acount/create', [CompanyBankAccountController::class, 'create'])->name('company.account.create');
+    Route::post('/company/bank/acount/store', [CompanyBankAccountController::class, 'store'])->name('company.account.store');
+
+    Route::post('/convert-amount-to-words', [BeneficiaryController::class, 'convertAmountToWords'])->name('convertAmountToWords');
 });
 
 require __DIR__ . '/auth.php';

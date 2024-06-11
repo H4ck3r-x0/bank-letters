@@ -2,5 +2,5 @@
 
 return [
     App\Providers\AppServiceProvider::class,
-    Alkoumi\LaravelArabicNumbers\LaravelArabicNumbersServiceProvider::class,
+    Alkoumi\LaravelArabicNumbers\LaravelArabicNumbersServiceProvider::class
 ];

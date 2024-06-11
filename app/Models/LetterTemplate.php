@@ -11,6 +11,11 @@ class LetterTemplate extends Model
 
     protected $fillable = [
         'directed_to',
-        'content',
+        'company_bank_account_id',
     ];
+
+    public function companyBankAccount()
+    {
+        return $this->belongsTo(CompanyBankAccount::class);
+    }
 }

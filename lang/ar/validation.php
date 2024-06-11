@@ -149,7 +149,7 @@ return [
     'attributes' => [
         'name' => 'الاسم الكريم',
         'directed_to' => 'موجه الى',
-        'content' => 'المحتوى',
+        'account_number' => 'رقم الحساب',
     ],
 
 ];

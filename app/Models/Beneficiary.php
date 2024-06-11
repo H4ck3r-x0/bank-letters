@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Alkoumi\LaravelArabicNumbers\Numbers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use ArPHP\I18N\Arabic;
 
 class Beneficiary extends Model
 {
@@ -23,6 +23,11 @@ class Beneficiary extends Model
 
     public function getAmountInWordsAttribute()
     {
-        return Numbers::TafqeetMoney($this->amount);
+        $arabic = new Arabic();
+
+        $amountInWords = $arabic->int2str($this->amount);
+        $amountInWords = str_replace(' فاصلة ', ' و ', $amountInWords);
+
+        return $amountInWords;
     }
 }

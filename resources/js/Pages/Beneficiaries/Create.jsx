@@ -4,7 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Pagination from '../../Components/Pagination';
 
-export default function Create({ auth, beneficiaries, templates }) {
+export default function Create({ auth, beneficiaries, templates, currencies }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -36,7 +36,11 @@ export default function Create({ auth, beneficiaries, templates }) {
                     </div>
                     <div className="overflow-hidden">
                         <div className="text-gray-900">
-                            <BeneficiariesTable templates={templates} beneficiaries={beneficiaries.data} />
+                            <BeneficiariesTable
+                                templates={templates}
+                                beneficiaries={beneficiaries.data}
+                                currencies={currencies}
+                            />
                         </div>
 
                         <div className='py-4'>

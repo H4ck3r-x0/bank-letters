@@ -10,38 +10,34 @@ import { Transition } from '@headlessui/react';
 export default function Create({ auth }) {
     const { data, setData, errors, post, reset, processing, recentlySuccessful } = useForm({
         directed_to: '',
-        content: '',
+        account_number: '',
     });
 
     const saveLetter = (e) => {
         e.preventDefault();
 
-        post(route('letter.store'), {
+        post(route('company.account.store'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
                 if (errors.password) {
-                    reset('directed_to', 'content');
+                    reset('directed_to', 'account_number');
                 }
             },
         });
     };
 
-
-
-
-
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إنشاء قالب خطاب</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">إنشاء حسابات بنكية</h2>}
         >
-            <Head title="إنشاء قالب خطاب" />
+            <Head title="إنشاء حسابات بنكية" />
 
             <div className="py-8">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className='mb-4'>
-                        <h1 className='text-2xl font-bold text-gray-600'>إنشاء قالب للخطابات البنكية</h1>
+                        <h1 className='text-2xl font-bold text-gray-600'>إنشاء حسابات بنكية</h1>
                     </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
@@ -63,16 +59,19 @@ export default function Create({ auth }) {
                                 </div>
 
                                 <div>
-                                    <InputLabel htmlFor="content" value="الخطاب" className='text-lg mb-2' />
+                                    <InputLabel htmlFor="account_number" value="حساب الشركة" className='mb-2' />
 
-                                    <textarea
-                                        className='w-full h-60 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm'
-                                        id="content"
-                                        value={data.content}
-                                        onChange={(e) => setData('content', e.target.value)}
-                                    ></textarea>
+                                    <TextInput
+                                        id="account_number"
+                                        value={data.account_number}
+                                        onChange={(e) => setData('account_number', e.target.value)}
+                                        type="text"
+                                        className="mt-1 block w-full"
+                                        placeholder="SA373736 ...."
 
-                                    <InputError message={errors.content} className="mt-2" />
+                                    />
+
+                                    <InputError message={errors.account_number} className="mt-2" />
                                 </div>
 
                                 <div className="flex items-center gap-4">

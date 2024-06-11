@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Beneficiaries;
 use App\Http\Controllers\Controller;
 use App\Imports\BeneficiariesImport;
 use App\Models\Beneficiary;
+use App\Models\Currency;
 use App\Models\LetterTemplate;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel;
+use ArPHP\I18N\Arabic;
 
 class BeneficiaryController extends Controller
 {
@@ -26,11 +28,14 @@ class BeneficiaryController extends Controller
     public function create()
     {
         $beneficiaries = Beneficiary::paginate(10);
-        $templates = LetterTemplate::all();
+        $templates = LetterTemplate::with('companyBankAccount')->get();
+
+        $currencies = Currency::all();
 
         return Inertia::render('Beneficiaries/Create', [
             'beneficiaries' => $beneficiaries,
             'templates' => $templates,
+            'currencies' => $currencies,
         ]);
     }
 
@@ -55,6 +60,18 @@ class BeneficiaryController extends Controller
         }
 
         return redirect()->back();
+    }
+
+
+    public function convertAmountToWords(Request $request)
+    {
+        $amount = $request->input('amount');
+        $arabic = new Arabic();
+
+        $amountInWords = $arabic->int2str($amount);
+        $amountInWords = str_replace(' فاصلة ', ' و ', $amountInWords);
+
+        return response()->json(['amount_in_words' => $amountInWords]);
     }
 
     /**

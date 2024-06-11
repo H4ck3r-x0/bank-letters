@@ -29,8 +29,8 @@ export default function Authenticated({ user, header, children }) {
                                     إضافة مستفيدين
                                 </NavLink>
 
-                                <NavLink href={route('letter.create')} active={route().current('letter.create')}>
-                                    الخطابات البنكية
+                                <NavLink href={route('company.account.create')} active={route().current('company.account.create')}>
+                                    الحسابات البنكية
                                 </NavLink>
                             </div>
                         </div>
@@ -108,8 +108,8 @@ export default function Authenticated({ user, header, children }) {
                             إضافة مستفيدين
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink href={route('letter.create')} active={route().current('letter.create')}>
-                            الخطابات البنكية
+                        <ResponsiveNavLink href={route('company.account.create')} active={route().current('company.account.create')}>
+                            الحسابات البنكية
                         </ResponsiveNavLink>
                     </div>
 

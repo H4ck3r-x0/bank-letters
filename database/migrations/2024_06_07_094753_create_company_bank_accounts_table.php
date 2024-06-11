@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('letter_templates', function (Blueprint $table) {
+        Schema::create('company_bank_accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('directed_to')->nullable();
+            $table->string('account_number');
             $table->timestamps();
         });
     }
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('letter_templates');
+        Schema::dropIfExists('company_bank_accounts');
     }
 };

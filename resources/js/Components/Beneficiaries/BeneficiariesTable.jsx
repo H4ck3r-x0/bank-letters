@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import SecondaryButton from '../SecondaryButton'
 import Modal from '../Beneficiaries/Modal'
-function BeneficiariesTable({ beneficiaries, templates }) {
+
+
+function BeneficiariesTable({ beneficiaries, templates, currencies }) {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedTemplate, setSelectedTemplate] = useState(null);
     const [selectedBeneficiary, setSelectedBeneficiary] = useState(null);
@@ -18,6 +20,7 @@ function BeneficiariesTable({ beneficiaries, templates }) {
                     isOpen={isModalOpen}
                     onClose={() => setModalOpen(false)}
                     templates={templates}
+                    currencies={currencies}
                     beneficiary={selectedBeneficiary}
                     onTemplateSelect={setSelectedTemplate}
                 />
