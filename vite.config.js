@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     server: {
-        host: 'https://bank-letters.test'
+        host: process.env.APP_ENV === 'production' ? 'hammerhead-app-d6jgh.ondigitalocean.app' : 'https://bank-letters.test'
     },
     plugins: [
         laravel({
